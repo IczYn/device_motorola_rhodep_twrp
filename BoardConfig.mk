@@ -42,12 +42,12 @@ FOX_VARIANT := Custom_Roms
 OF_MAINTAINER := IczYn
 FOX_VERSION := 0.02
 FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER := 1
-OF_VIRTUAL_AB_DEVICE := 1
-OF_AB_DEVICE := 1
+#OF_VIRTUAL_AB_DEVICE := 1
+#OF_AB_DEVICE := 1
 OF_USE_MAGISKBOOT_FOR_ALL_PATCHES := 1
-OF_VIRTUAL_AB_DEVICE := 1
+#OF_VIRTUAL_AB_DEVICE := 1
 OF_SKIP_FBE_DECRYPTION := 1
-FOX_ADVANCED_SECURITY := 1
+#FOX_ADVANCED_SECURITY := 1
 FOX_ENABLE_APP_MANAGER := 1
 FOX_USE_SPECIFIC_MAGISK_ZIP=~/Desktop/Magisk-v26.1.zip
 OF_NO_ADDITIONAL_MIUI_PROPS_CHECK := 1
@@ -72,7 +72,7 @@ BOARD_SUPPRESS_SECURE_ERASE := true
 
 # Kernel
 BOARD_KERNEL_BASE := 0x00000000
-BOARD_KERNEL_IMAGE_NAME := kernel
+#BOARD_KERNEL_IMAGE_NAME := kernel
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_BOOT_HEADER_VERSION := 3
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
@@ -152,6 +152,7 @@ TARGET_RECOVERY_DEVICE_MODULES += \
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_BOOTIMAGE_PARTITION_SIZE := 100663296
+BOARD_DTBOIMG_PARTITION_SIZE := 25165824
 BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := 100663296
 BOARD_VENDORIMAGE_PARTITION_SIZE := 975491072
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 4640314624
@@ -220,8 +221,39 @@ TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(TARGET_OUT_EXECUTABLES)/debuggerd
 RECOVERY_INSTALLER_PATH := bootable/recovery/installer
 USE_RECOVERY_INSTALLER := true
 
-# TWRP Load TouchScreen Modules
-TW_LOAD_VENDOR_MODULES := "moto_f_usbnet.ko nova_0flash_mmi.ko nvt_36xxx.ko qpnp_adaptive_charge.ko utags.ko"
+# Kernel module loading
+TW_LOAD_VENDOR_MODULES := "adapter_class.ko \
+            bq2589x_charger.ko \
+            bq2597x_mmi_iio.ko \
+            cw2217b_fg_mmi.ko \
+            exfat.ko \
+            goodix_brl_mmi.ko \
+            ldo_vibrator_mmi.ko \
+            mmi_annotate.ko \
+            mmi_charger.ko \
+            mmi_discrete_charger_class.ko \
+            mmi_discrete_charger.ko \
+            mmi_info.ko \
+            mmi_sys_temp.ko \
+            moto_f_usbnet.ko \
+            qpnp_adaptive_charge.ko \
+            rt_pd_manager.ko \
+            sensors_class.ko \
+            sgm4154x_charger.ko \
+            sm5602_fg_mmi.ko \
+            synaptics_tcm_core.ko \
+            synaptics_tcm_device.ko \
+            synaptics_tcm_diagnostics.ko \
+            synaptics_tcm_i2c.ko \
+            synaptics_tcm_recovery.ko \
+            synaptics_tcm_reflash.ko \
+            synaptics_tcm_spi.ko \
+            synaptics_tcm_testing.ko \
+            synaptics_tcm_touch.ko \
+            synaptics_tcm_zeroflash.ko \
+            tcpc_class.ko \
+            tcpc_sgm7220.ko \
+            utags.ko"
 
 # Verified Boot
 BOARD_AVB_ENABLE := true
